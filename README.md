@@ -35,7 +35,6 @@ Add new subscriber
 ```sh
 {
     subscriber_id: "unique identifier" (string),
-    receiving_notifcations: true/false (boolean),
     preferred_notification_method: "in-app/email/phone" (string),
     email: "email address" (string),
     phone: "phone number" (string)

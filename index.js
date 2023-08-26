@@ -28,7 +28,6 @@ fastify.post("/new-subscriber", async function handler(req, reply) {
 
     await client.db("EgloNS").collection("Users").insertOne({
       subscriber_id: req.body.subscriber_id,
-      receiving_notifcations: req.body.receiving_notifcations,
       notifications: [],
       last_notification_time: Date.now(),
       last_updated_time: Date.now(),
@@ -302,45 +301,39 @@ fastify.post("/notify", async function handler(req, reply) {
         subscriber_id: user,
       });
 
-      if (found_user === null) {
-        return;
-      }
+      if (found_user !== null) {
+        let notification_id = uuidv4();
 
-      if (found_user.receiving_notifcations === false) {
-        return;
-      }
-
-      let notification_id = uuidv4();
-
-      await client
-        .db("EgloNS")
-        .collection("Users")
-        .updateOne(
-          { subscriber_id: user },
-          {
-            $push: {
-              notifications: {
-                icon: req.body.icon,
-                title: req.body.title,
-                text: req.body.text,
-                read: false,
-                id: notification_id,
+        await client
+          .db("EgloNS")
+          .collection("Users")
+          .updateOne(
+            { subscriber_id: user },
+            {
+              $push: {
+                notifications: {
+                  icon: req.body.icon,
+                  title: req.body.title,
+                  text: req.body.text,
+                  read: false,
+                  id: notification_id,
+                },
               },
-            },
-          }
-        );
+            }
+          );
 
-      await client
-        .db("EgloNS")
-        .collection("Users")
-        .updateOne(
-          { subscriber_id: user },
-          {
-            $set: {
-              last_notification_time: Date.now(),
-            },
-          }
-        );
+        await client
+          .db("EgloNS")
+          .collection("Users")
+          .updateOne(
+            { subscriber_id: user },
+            {
+              $set: {
+                last_notification_time: Date.now(),
+              },
+            }
+          );
+      }
     }
 
     reply.send({
