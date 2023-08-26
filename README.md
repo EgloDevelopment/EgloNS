@@ -43,7 +43,6 @@ Add new subscriber
 }
 ```
 
-ㅤ
 Delete subscriber
 >http://localhost:3000/delete-subscriber
 ```sh
@@ -52,7 +51,6 @@ Delete subscriber
 }
 ```
 
-ㅤ
 Set preferred method
 >http://localhost:3000/set-preferred-method
 ```sh
@@ -62,7 +60,6 @@ Set preferred method
 }
 ```
 
-ㅤ
 Set email
 >http://localhost:3000/set-email
 ```sh
@@ -72,7 +69,6 @@ Set email
 }
 ```
 
-ㅤ
 Set phone
 >http://localhost:3000/set-email
 ```sh
@@ -82,7 +78,6 @@ Set phone
 }
 ```
 
-ㅤ
 Read notification
 >http://localhost:3000/read-notification
 ```sh
@@ -92,7 +87,6 @@ Read notification
 }
 ```
 
-ㅤ
 Clear notifications
 >http://localhost:3000/clear-notifications
 ```sh
@@ -101,7 +95,6 @@ Clear notifications
 }
 ```
 
-ㅤ
 Notify users
 >http://localhost:3000/notify
 ```sh
@@ -113,7 +106,6 @@ Notify users
 }
 ```
 
-ㅤ
 Get notifications
 >http://localhost:3000/get-notifications
 ```sh
@@ -121,5 +113,6 @@ Get notifications
     subscriber_id: "unique identifier" (string)
 }
 ```
+
 ## ???:
 If I am being honest I wrote this at 1AM and my English isnt goog, if there is anything that needs to be improved or you need help just email us (contact@eglo.pw) or make a pull/merge request, or submit and issue. Sorry for the bad code, but at least it works.
