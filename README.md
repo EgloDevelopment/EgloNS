@@ -29,7 +29,7 @@ EgloNS is a simple notifcation service, supporting email notifications, text mes
 
 ## Routes:
 **ALL OF THESE ARE POST REQUESTS, AND EITHER RETURN SUCCESS TRUE OR FALSE**
-ㅤ
+
 Add new subscriber
 >http://localhost:3000/new-subscriber
 ```sh
