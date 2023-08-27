@@ -10,7 +10,12 @@ mongodb_init();
 
 const resendAccessToken = process.env.RESEND_TOKEN;
 
-fastify.get("/", function handler(request, reply) {
+fastify.register(require('@fastify/cors'), {
+  origin:'*',
+  methods:['POST, GET'],
+})
+
+fastify.get("/", async function handler(request, reply) {
   reply.send("EgloNotificationService");
 });
 

@@ -32,6 +32,8 @@ Easy to setup.
 ## Routes:
 **ALL OF THESE ARE POST REQUESTS, AND EITHER RETURN SUCCESS TRUE OR FALSE**
 
+**IT IS RECOMMENDED TO RUN THIS BEHIND A BACKEND, DO NOT EXPOSE THIS SERVER TO THE PUBLIC**
+
 Add new subscriber
 >http://localhost:3000/new-subscriber
 ```sh
@@ -59,7 +61,7 @@ Set email
 }
 ```
 
-Read notification
+Mark notification as read
 >http://localhost:3000/read-notification
 ```sh
 {
