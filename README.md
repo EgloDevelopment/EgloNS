@@ -11,7 +11,9 @@ Simple and easy to use POST Request based notification service.
 
 ## Features:
 
-EgloNS is a simple notifcation service, supporting email notifications, text messages, and in-app notifications.
+Supports email and in-app notifications.
+Send a daily summary of notifications.
+Easy to setup.
 
 > NOTE: It is easy to mess up, as there is minimal server-side validation,
 > just follow the docs
@@ -23,7 +25,7 @@ EgloNS is a simple notifcation service, supporting email notifications, text mes
 + Download the Github repository
 + Create a MongoDB instance
 + Run the server with Docker after you build the file
-+ Add the .env based off of the "example.env" provided in the repository
++ Add the .env based off of the "example.env" provided in the repository (YOU MUST HAVE A RESEND.COM TOKEN)
 + You should now be good to go, visit localhost:3000 (or where you have set it to run)
 + If you have any issues, email contact@eglo.pw, or make a GitHub issue
 
@@ -35,9 +37,7 @@ Add new subscriber
 ```sh
 {
     subscriber_id: "unique identifier" (string),
-    preferred_notification_method: "in-app/email/phone" (string),
-    email: "email address" (string),
-    phone: "phone number" (string)
+    email: "email address" (string)
     
 }
 ```
@@ -50,30 +50,12 @@ Delete subscriber
 }
 ```
 
-Set preferred method
->http://localhost:3000/set-preferred-method
-```sh
-{
-    subscriber_id: "unique identifier" (string),
-    preferred_notification_method: "in-app/email/phone" (string)
-}
-```
-
 Set email
 >http://localhost:3000/set-email
 ```sh
 {
     subscriber_id: "unique identifier" (string),
     email: "email address" (string)
-}
-```
-
-Set phone
->http://localhost:3000/set-email
-```sh
-{
-    subscriber_id: "unique identifier" (string),
-    phone: "phone number" (string)
 }
 ```
 
@@ -112,6 +94,11 @@ Get notifications
     subscriber_id: "unique identifier" (string)
 }
 ```
+
+# Settings
+Daily notification summary can be disabled by not having any users with an email, just set the email when you register a new subscriber to "".
+
+At some point we will add text-messaging support. 
 
 ## ???:
 If I am being honest I wrote this at 1AM and my English isnt goog, if there is anything that needs to be improved or you need help just email us (contact@eglo.pw) or make a pull/merge request, or submit and issue. Sorry for the bad code, but at least it works.
