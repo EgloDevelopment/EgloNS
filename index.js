@@ -112,7 +112,7 @@ fastify.post("/set-email", async function handler(req, reply) {
       .db("EgloNS")
       .collection("Users")
       .updateOne(
-        { subscriber_id: user },
+        { subscriber_id: req.body.subscriber_id },
         {
           $set: {
             email: req.body.email,
