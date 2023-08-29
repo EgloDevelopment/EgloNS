@@ -397,9 +397,21 @@ cron.schedule("0 0 * * *", async () => {
   }
 });
 
-fastify.listen({ port: 3000 }, (err) => {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
-  }
-});
+
+if (process.env.ENVIROMENT === "local") {
+  fastify.listen({ port: 3000 }, (err) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+  });
+}
+
+if (process.env.ENVIROMENT === "docker") {
+  fastify.listen({ port: 3000, host: "0.0.0.0" }, (err) => {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+  });
+}
