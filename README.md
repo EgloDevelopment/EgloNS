@@ -70,6 +70,15 @@ Mark notification as read
 }
 ```
 
+Delete notification
+>http://localhost:3000/delete-notification
+```sh
+{
+    subscriber_id: "unique identifier" (string),
+    notification_id: "unique identifier" (string)
+}
+```
+
 Clear notifications
 >http://localhost:3000/clear-notifications
 ```sh

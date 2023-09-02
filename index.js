@@ -10,10 +10,10 @@ mongodb_init();
 
 const resendAccessToken = process.env.RESEND_TOKEN;
 
-fastify.register(require('@fastify/cors'), {
-  origin:'*',
-  methods:['POST, GET'],
-})
+fastify.register(require("@fastify/cors"), {
+  origin: "*",
+  methods: ["POST, GET"],
+});
 
 fastify.get("/", async function handler(request, reply) {
   reply.send("EgloNotificationService");
@@ -176,6 +176,48 @@ fastify.post("/read-notification", async function handler(req, reply) {
   }
 });
 
+fastify.post("/delete-notification", async function handler(req, reply) {
+  try {
+    const client = get();
+
+    let check_for_id = await client
+      .db("EgloNS")
+      .collection("Users")
+      .findOne({ subscriber_id: req.body.subscriber_id });
+
+    if (check_for_id === null) {
+      reply.send({
+        success: false,
+        error: "User does not exist",
+      });
+      return;
+    }
+
+    await client
+      .db("EgloNS")
+      .collection("Users")
+      .updateOne(
+        {
+          subscriber_id: req.body.subscriber_id,
+          "notifications.id": req.body.notification_id,
+        },
+        {
+          $pull: { notifications: { id: req.body.notification_id } },
+        }
+      );
+
+    reply.send({
+      success: true,
+    });
+  } catch (e) {
+    console.log(e);
+    reply.send({
+      success: false,
+      error: "Failed to delete, check ENS console",
+    });
+  }
+});
+
 fastify.post("/clear-notifications", async function handler(req, reply) {
   try {
     const client = get();
@@ -318,7 +360,7 @@ fastify.post("/get-notifications", async function handler(req, reply) {
 });
 
 cron.schedule("0 0 * * *", async () => {
-//cron.schedule("* * * * *", async () => {
+  //cron.schedule("* * * * *", async () => {
   try {
     function formatDate(unixTimestamp) {
       const months = [
@@ -396,7 +438,6 @@ cron.schedule("0 0 * * *", async () => {
     console.log(e);
   }
 });
-
 
 if (process.env.ENVIROMENT === "local") {
   fastify.listen({ port: 3000 }, (err) => {
